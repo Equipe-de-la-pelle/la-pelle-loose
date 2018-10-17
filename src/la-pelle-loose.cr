@@ -6,7 +6,7 @@ module LaPelleLoose
   VERSION = "0.1.0"
 end
 
-Granite::Adapters << Granite::Adapter::Mysql.new({name: "mysql", url: "YOUR_DATABASE_URL"})
+# Granite::Adapters << Granite::Adapter::Mysql.new({name: "mysql", url: "YOUR_DATABASE_URL"})
 
 static_headers do |response, filepath, filestat|
   if filepath =~ /\.html$/
