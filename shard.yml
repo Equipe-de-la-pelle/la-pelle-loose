@@ -24,3 +24,6 @@ dependencies:
 
   pg:
     github: will/crystal-pg
+
+  dotenv:
+    github: gdotdesign/cr-dotenv
