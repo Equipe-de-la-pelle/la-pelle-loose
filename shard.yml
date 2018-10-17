@@ -1,0 +1,17 @@
+name: la-pelle-loose
+version: 0.1.0
+
+authors:
+  - Alexandre Lairan <lairana@free.fr>
+
+targets:
+  la-pelle-loose:
+    main: src/la-pelle-loose.cr
+
+crystal: 0.26.1
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
