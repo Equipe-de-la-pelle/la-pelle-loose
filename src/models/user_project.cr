@@ -1,6 +1,6 @@
 module Models
   class UserProject < Granite::Base
-    adapter mysql
+    adapter pg
 
     table_name user_has_project
 

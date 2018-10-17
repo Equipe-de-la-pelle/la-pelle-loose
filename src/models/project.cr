@@ -1,8 +1,8 @@
 module Models
-  class Project <Granite::Base
-    adapter mysql
+  class Project < Granite::Base
+    adapter pg
 
-    table_name project
+    table_name projects
 
     field title : String
     field description : String

@@ -1,19 +1,19 @@
 get "/users" do |env|
-  # users = User.all
-  #
-  # if users
-  #   users.to_json
-  # end
+  users = Models::User.all
+
+  if users
+    { data: users, count: users.size }.to_json
+  end
 end
 
 get "/users/:id" do |env|
-  # user = User.find(env.params.url["id"])
-  #
-  # if user
-  #   user.to_json
-  # else
-  #   halt env, status_code: 404, response: "Not Found"
-  # end
+  user = Models::User.find(env.params.url["id"])
+
+  if user
+    { data: user }.to_json
+  else
+    raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
 end
 
 put "/users/:id" do |env|

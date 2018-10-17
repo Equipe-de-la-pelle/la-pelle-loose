@@ -18,3 +18,9 @@ dependencies:
 
   granite:
     github: amberframework/granite
+
+  micrate:
+    github: juanedi/micrate
+
+  pg:
+    github: will/crystal-pg

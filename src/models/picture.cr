@@ -1,8 +1,8 @@
 module Models
   class Picture < Granite::Base
-    adapter mysql
+    adapter pg
 
-    table_name picture
+    table_name pictures
 
     field name : String
     field path : String
