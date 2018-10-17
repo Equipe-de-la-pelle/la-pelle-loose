@@ -1,5 +1,7 @@
 require "kemal"
 
+require "./routes/*"
+
 module LaPelleLoose
   VERSION = "0.1.0"
 end
