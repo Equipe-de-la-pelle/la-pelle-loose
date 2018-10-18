@@ -10,12 +10,14 @@ post "/projects" do |env|
     title = env.params.json["title"].as(String)
     description = env.params.json["description"].as(String)
     short = env.params.json["short"].as(String)
+    email = env.params.json["email"].as(String)
 
     # Models::Project.create(title: "#{title}", description: "#{description}", short: "#{short}")
         project = Models::Project.new
         project.title = title
         project.description = description
         project.short = short
+        project.email = email
         project.save
         {data: project}.to_json
 
@@ -45,6 +47,7 @@ put "/projects/:id" do |env|
   title = env.params.json["title"].as(String)
   description = env.params.json["description"].as(String)
   short = env.params.json["short"].as(String)
+  email = env.params.json["email"].as(String)
 
   project = Models::Project.find(env.params.url["id"])
   if project
@@ -52,6 +55,7 @@ put "/projects/:id" do |env|
     project.title = title
     project.description = description
     project.short = short
+    project.email = email
     project.save
     {data: project}.to_json
   else

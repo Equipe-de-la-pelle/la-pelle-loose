@@ -8,6 +8,7 @@ module Models
     field nickname : String
     field first_name : String
     field last_name : String
+    field email : String
     field token : String?
 
     belongs_to :picture, foreign_key: picture_id : Int32?
