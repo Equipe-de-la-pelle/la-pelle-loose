@@ -7,6 +7,18 @@ get "/projects" do |env|
 end
 
 post "/projects" do |env|
+    title = env.params.json["title"].as(String)
+    description = env.params.json["description"].as(String)
+    short = env.params.json["short"].as(String)
+
+    # Models::Project.create(title: "#{title}", description: "#{description}", short: "#{short}")
+        project = Models::Project.new
+        project.title = title
+        project.description = description
+        project.short = short
+        project.save
+        {data: project}.to_json
+
 end
 
 get "/projects/search/:search" do |env|
@@ -30,20 +42,31 @@ get "/projects/:id" do |env|
 end
 
 put "/projects/:id" do |env|
+  title = env.params.json["title"].as(String)
+  description = env.params.json["description"].as(String)
+  short = env.params.json["short"].as(String)
+
   project = Models::Project.find(env.params.url["id"])
-
   if project
-    # project.title = env.params.json["title"].as(String)
-    # project.description = env.params.json["description"].as(String)
-    # project.short = env.params.json["short"].as(String)
 
-    # project.save
+    project.title = title
+    project.description = description
+    project.short = short
+    project.save
+    {data: project}.to_json
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
 end
 
 delete "/projects/:id" do |env|
+
+  project = Models::Project.find(env.params.url["id"])
+  if project
+    project.destroy
+  else
+    raise Kemal::Exceptions::RouteNotFound.new(env)
+  end
 end
 
 post "/projects/:id/picture" do |env|
@@ -88,7 +111,7 @@ end
 get "/projects/:id/picture" do |env|
 
   project = Models::Project.find!(env.params.url["id"])
-  
+
   if project
     picture = project.picture
 
