@@ -5,7 +5,7 @@ module Service
 
 
     def search(input_project : String)
-      Models::Project.where(:title, :like, input_project).select
+      Models::Project.where(:title, :like, "%#{input_project}%").select
     end
 
     def fetch_projects(id : String | Nil = nil )

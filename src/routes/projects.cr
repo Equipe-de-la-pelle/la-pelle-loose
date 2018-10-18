@@ -1,4 +1,4 @@
-
+project = Models::Project.new
 
 get "/projects" do |env|
 projects = Models::Project.all
