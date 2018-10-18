@@ -21,10 +21,8 @@ get "/users/:id/picture" do |env|
   if user
     picture = user.picture
 
-    pp picture
-
     raise Kemal::Exceptions::RouteNotFound.new(env) if picture.new_record?
-    pp send_file env, picture.path.not_nil!
+    send_file env, picture.path.not_nil!
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
