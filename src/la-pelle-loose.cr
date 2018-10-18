@@ -15,6 +15,7 @@ require "./services/*"
 before_all do |env|
   env.response.content_type = "application/json"
   env.response.headers.add("Access-Control-Allow-Origin", "*")
+  env.response.headers.add("Access-Control-Allow-Headers", "Content-Type")
   env.response.headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
   # env.response.headers.add("Content-Size", filestat.size.to_s)
 end
