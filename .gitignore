@@ -6,3 +6,10 @@
 .env
 .remote-sync.json
 .ftpconfig
+/uploads/**/*
+!/uploads/users/.keep
+!/uploads/projects/.keep
+
+\.travis\.yml
+
+config~HEAD

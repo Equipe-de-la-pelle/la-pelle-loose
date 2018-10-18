@@ -9,9 +9,9 @@ module Models
     field description : String
     field short : String
 
-    # has_one :picture
+    belongs_to :picture, foreign_key: picture_id : Int32?
 
-    has_many :user_projects, class_name: UserProject
-    has_many :users, class_name: User, through: :user_projects
+    # has_many :user_projects, class_name: UserProject
+    # has_many :users, class_name: User, through: :user_projects
   end
 end
