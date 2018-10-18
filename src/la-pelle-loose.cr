@@ -8,6 +8,7 @@ Granite::Adapters << Granite::Adapter::Pg.new({ name: "pg", url: ENV["DATABASE_U
 
 require "./routes/*"
 require "./models/*"
+require "./services/*"
 
 static_headers do |response, filepath, filestat|
   response.headers.add("Access-Control-Allow-Origin", "*")
