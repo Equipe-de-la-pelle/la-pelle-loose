@@ -14,4 +14,8 @@ static_headers do |response, filepath, filestat|
   response.headers.add("Content-Size", filestat.size.to_s)
 end
 
+before_all do |env|
+  env.response.content_type = "application/json"
+end
+
 Kemal.run

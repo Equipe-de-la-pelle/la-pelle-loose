@@ -33,15 +33,15 @@ end
 
 post "/users/:id/picture" do |env|
   HTTP::FormData.parse(env.request) do |upload|
-      filename = upload.filename
-    # Be sure to check if file.filename is not empty otherwise it'll raise a compile time error
-      if !filename.is_a?(String)
-        p "No filename included in upload"
-      else
-        file_path = ::File.join [Kemal.config.public_folder, "uploads/users", filename]
-        File.open(file_path, "w") do |f|
-          IO.copy(upload.body, f)
-        end
+    filename = upload.filename
+
+    if !filename.is_a?(String)
+      { error: "Filename is missing" }.to_json
+    else
+      file_path = ::File.join ["uploads/users", filename]
+      File.open(file_path, "w") do |f|
+        IO.copy(upload.body, f)
       end
     end
+  end
 end
