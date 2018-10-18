@@ -5,11 +5,12 @@ require "granite/adapter/pg"
 require "pg"
 
 Granite::Adapters << Granite::Adapter::Pg.new({ name: "pg", url: ENV["DATABASE_URL"] })
+Granite.settings.logger = Logger.new(STDOUT)
 
+require "./macros/*"
 require "./routes/*"
 require "./models/*"
 require "./services/*"
-
 
 before_all do |env|
   env.response.content_type = "application/json"
