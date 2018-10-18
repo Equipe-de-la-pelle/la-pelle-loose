@@ -4,6 +4,7 @@
 /.shards/
 *.dwarf
 .env
+.env.test
 .remote-sync.json
 .ftpconfig
 /uploads/**/*

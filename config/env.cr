@@ -1,11 +1,8 @@
 require "dotenv"
 
 begin
-  Dotenv.load!
+  source = ENV["KEMAL_ENV"] == "test" ? ".env.test" : ".env"
+  Dotenv.load!(source)
 rescue
   exit 1
-
-
-
-
 end
