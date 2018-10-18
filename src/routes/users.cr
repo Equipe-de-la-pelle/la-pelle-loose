@@ -23,7 +23,7 @@ get "/users/:id/picture" do |env|
 
     pp picture
 
-    if picture
+    if !picture.new_record?
       file_path = ::File.join ["uploads/users", picture.path.not_nil!]
       send_file env, file_path
     else

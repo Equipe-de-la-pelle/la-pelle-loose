@@ -1,7 +1,6 @@
-project = Models::Project.new
-
 get "/projects" do |env|
-projects = Models::Project.all
+  projects = Models::Project.all
+
   if projects
     { data: projects, count: projects.size }.to_json
   end
@@ -88,14 +87,14 @@ post "/projects/:id/picture" do |env|
   end
 end
 
-get "projects/:id/picture" do |env|
-  project = Models::Project.find(env.params.url["id"])
+get "/projects/:id/picture" do |env|
+  project = Models::Project.find!(env.params.url["id"])
+
   if project
     picture = project.picture
 
-    pp picture
-
-    if picture
+    if !picture.new_record?
+      pp picture
       file_path = ::File.join ["uploads/projects", picture.path.not_nil!]
       send_file env, file_path
     else
