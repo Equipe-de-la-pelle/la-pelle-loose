@@ -48,7 +48,7 @@ post "/users/:id/picture" do |env|
       if !filename.is_a?(String)
         p "No filename included in upload"
       else
-        file_path = ::File.join [Kemal.config.public_folder, "uploads/users", filename]
+        file_path = ::File.join ["uploads/users", filename]
         File.open(file_path, "w") do |f|
           IO.copy(upload.body, f)
         end
