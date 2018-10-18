@@ -12,15 +12,18 @@ post "/projects" do |env|
     short = env.params.json["short"].as(String)
     email = env.params.json["email"].as(String)
 
-    # Models::Project.create(title: "#{title}", description: "#{description}", short: "#{short}")
-        project = Models::Project.new
-        project.title = title
-        project.description = description
-        project.short = short
-        project.email = email
-        project.save
-        {data: project}.to_json
+    project = Models::Project.new
+    project.title = title
+    project.description = description
+    project.short = short
+    project.email = email
 
+    if project.save
+      { data: project }.to_json
+    else
+      env.response.status_code = 422
+      { error: project }.to_json
+    end
 end
 
 get "/projects/search/:search" do |env|
@@ -100,13 +103,8 @@ get "/projects/:id/picture" do |env|
   if project
     picture = project.picture
 
-    if !picture.new_record?
-      pp picture
-      file_path = ::File.join ["uploads/projects", picture.path.not_nil!]
-      send_file env, file_path
-    else
-      raise Kemal::Exceptions::RouteNotFound.new(env)
-    end
+    raise Kemal::Exceptions::RouteNotFound.new(env) if picture.new_record?
+    send_file env, picture.path.not_nil!
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
