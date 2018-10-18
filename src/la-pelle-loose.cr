@@ -16,6 +16,8 @@ end
 
 before_all do |env|
   env.response.content_type = "application/json"
+  env.response.headers.add("Access-Control-Allow-Origin", "*")
+  # env.response.headers.add("Content-Size", filestat.size.to_s)
 end
 
 Kemal.run
