@@ -71,6 +71,12 @@ post "/users/:id/picture" do |env|
       else
         file_path = ::File.join ["uploads/users", filename]
 
+        if user_picture = user.picture
+          pp user_picture
+          File.delete(user_picture.path.not_nil!)
+          pp user_picture.destroy
+        end
+
         picture = Models::Picture.new
         picture.name = filename
         picture.path = file_path
@@ -78,12 +84,6 @@ post "/users/:id/picture" do |env|
         picture.save
 
         pp user.picture
-
-        if user_picture = user.picture
-          pp user_picture
-          File.delete(picture.path.not_nil!)
-          pp user_picture.destroy
-        end
 
         user.picture_id = picture.id
         pp user.save

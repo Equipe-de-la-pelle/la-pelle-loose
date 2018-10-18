@@ -48,6 +48,7 @@ end
 
 post "/projects/:id/picture" do |env|
   project = Models::Project.find(env.params.url["id"])
+  pp project
 
   if project
     HTTP::FormData.parse(env.request) do |upload|
@@ -58,19 +59,16 @@ post "/projects/:id/picture" do |env|
       else
         file_path = ::File.join ["uploads/projects", filename]
 
-        picture = Models::Picture.new
+        picture = project.picture
+
+        if !picture.new_record? && picture.path
+          File.delete(picture.path.not_nil!)
+        end
+
         picture.name = filename
         picture.path = file_path
 
         picture.save
-
-        pp project.picture
-
-        if project_picture = project.picture
-          pp project_picture
-          File.delete(picture.path.not_nil!)
-          pp project_picture.destroy
-        end
 
         project.picture_id = picture.id
         pp project.save
@@ -98,7 +96,7 @@ get "/projects/:id/picture" do |env|
       file_path = ::File.join ["uploads/projects", picture.path.not_nil!]
       send_file env, file_path
     else
-      { error: :error }.to_json
+      raise Kemal::Exceptions::RouteNotFound.new(env)
     end
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
