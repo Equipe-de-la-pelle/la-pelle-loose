@@ -65,7 +65,7 @@ post "/users/:id/picture" do |env|
   if user
     HTTP::FormData.parse(env.request) do |upload|
       if upload.filename && upload.body
-        service = Service::Upload.new(user)
+        service = Service::Upload.new(user, "users")
         service.call(
           upload.filename.not_nil!,
           upload.body.not_nil!

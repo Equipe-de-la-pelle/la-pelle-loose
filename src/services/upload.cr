@@ -1,11 +1,11 @@
 module Service
   class Upload(T)
-    def initialize(@entity : T)
+    def initialize(@entity : T, @direction : String)
     end
 
     def call(filename : String, body : IO)
       picture = @entity.picture
-      file_path = ::File.join ["uploads/projects", Time.now.epoch.to_s + filename]
+      file_path = ::File.join ["uploads", @direction, Time.now.epoch.to_s + filename]
 
       if !picture.new_record?
         File.delete(picture.path.not_nil!) rescue nil
