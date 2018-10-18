@@ -64,37 +64,16 @@ post "/users/:id/picture" do |env|
 
   if user
     HTTP::FormData.parse(env.request) do |upload|
-      filename = upload.filename
-
-      if !filename.is_a?(String)
-        { error: "Filename is missing" }.to_json
-      else
-        file_path = ::File.join ["uploads/users", filename]
-
-        if user_picture = user.picture
-          pp user_picture
-          File.delete(user_picture.path.not_nil!)
-          pp user_picture.destroy
-        end
-
-        picture = Models::Picture.new
-        picture.name = filename
-        picture.path = file_path
-
-        picture.save
-
-        pp user.picture
-
-        user.picture_id = picture.id
-        pp user.save
-
-        File.open(file_path, "w") do |f|
-          IO.copy(upload.body, f)
-        end
-
-        { upload: :ok }.to_json
+      if upload.filename && upload.body
+        service = Service::Upload.new(user)
+        service.call(
+          upload.filename.not_nil!,
+          upload.body.not_nil!
+        )
       end
     end
+
+    { upload: :ok }.to_json
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
