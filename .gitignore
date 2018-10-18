@@ -3,3 +3,6 @@
 /bin/
 /.shards/
 *.dwarf
+.env
+.remote-sync.json
+.ftpconfig

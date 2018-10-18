@@ -1,0 +1,6 @@
+require "micrate"
+require "pg"
+require "./config/env"
+
+Micrate::DB.connection_url = ENV["DATABASE_URL"]
+Micrate::Cli.run

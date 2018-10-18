@@ -1,11 +1,11 @@
 module Models
-  class Picture < Granite::Base
+  class Contact < Granite::Base
     adapter pg
 
-    table_name pictures
+    table_name contacts
 
     primary id : Int32
     field name : String
-    field path : String
+    field url : String
   end
 end

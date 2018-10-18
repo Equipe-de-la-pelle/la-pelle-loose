@@ -18,3 +18,12 @@ dependencies:
 
   granite:
     github: amberframework/granite
+
+  micrate:
+    github: juanedi/micrate
+
+  pg:
+    github: will/crystal-pg
+
+  dotenv:
+    github: gdotdesign/cr-dotenv
