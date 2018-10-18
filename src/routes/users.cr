@@ -38,16 +38,35 @@ put "/users/:id" do |env|
   nickname = env.params.json["nickname"].as(String)
   first_name = env.params.json["first_name"].as(String)
   last_name = env.params.json["last_name"].as(String)
+  email = env.params.json["email"].as(String)
 
   user = Models::User.find(env.params.url["id"])
   if user
     user.nickname = nickname
     user.first_name = first_name
     user.last_name = last_name
+    user.email = email
     user.save
+    {data: user}.to_json
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
+end
+
+post "/users" do |env|
+  nickname = env.params.json["nickname"].as(String)
+  first_name = env.params.json["first_name"].as(String)
+  last_name = env.params.json["last_name"].as(String)
+  email = env.params.json["email"].as(String)
+
+  user = Models::User.new
+  user.nickname = nickname
+  user.first_name = first_name
+  user.last_name = last_name
+  user.email = email
+  user.save
+  {data: user}.to_json
+
 end
 
 delete "/users/:id" do |env|

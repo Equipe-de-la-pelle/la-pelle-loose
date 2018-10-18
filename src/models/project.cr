@@ -8,6 +8,7 @@ module Models
     field title : String
     field description : String
     field short : String
+    field email : String
 
     belongs_to :picture, foreign_key: picture_id : Int32?
 
