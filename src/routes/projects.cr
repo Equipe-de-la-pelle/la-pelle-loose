@@ -34,11 +34,11 @@ put "/projects/:id" do |env|
   project = Models::Project.find(env.params.url["id"])
 
   if project
-    project.title = env.params.json["title"].as(String)
-    project.description = env.params.json["description"].as(String)
-    project.short = env.params.json["short"].as(String)
+    # project.title = env.params.json["title"].as(String)
+    # project.description = env.params.json["description"].as(String)
+    # project.short = env.params.json["short"].as(String)
 
-    project.save
+    # project.save
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end

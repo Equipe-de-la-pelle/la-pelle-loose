@@ -6,3 +6,5 @@
 .env
 .remote-sync.json
 .ftpconfig
+/uploads/**/*
+!/uploads/users/.keep

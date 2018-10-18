@@ -10,7 +10,7 @@ module Models
     field last_name : String
     field token : String?
 
-    # has_one :picture
+    belongs_to :picture, foreign_key: picture_id : Int32?
 
     # has_many :user_projects, class_name: UserProject
     # has_many :projects, class_name: Project, through: :user_projects
