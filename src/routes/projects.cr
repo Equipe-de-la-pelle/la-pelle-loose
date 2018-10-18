@@ -86,12 +86,9 @@ post "/projects/:id/picture" do |env|
 end
 
 get "/projects/:id/picture" do |env|
-<<<<<<< Updated upstream
-  project = Models::Project.find!(env.params.url["id"])
 
-=======
-  project = Models::Project.find(env.params.url["id"])
->>>>>>> Stashed changes
+  project = Models::Project.find!(env.params.url["id"])
+  
   if project
     picture = project.picture
 

@@ -17,7 +17,7 @@ get "/users/:id" do |env|
 end
 
 get "/users/:id/picture" do |env|
-  user = Models::User.find(env.params.url["id"])
+  user = Models::User.find!(env.params.url["id"])
   if user
     picture = user.picture
 
