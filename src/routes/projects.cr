@@ -11,7 +11,13 @@ post "/projects" do |env|
     description = env.params.json["description"].as(String)
     short = env.params.json["short"].as(String)
 
-    Models::Project.create(title: "#{title}", description: "#{description}", short: "#{short}")
+    # Models::Project.create(title: "#{title}", description: "#{description}", short: "#{short}")
+        project = Models::Project.new
+        project.title = title
+        project.description = description
+        project.short = short
+        project.save
+        {data: project}.to_json
 
 end
 
@@ -47,7 +53,7 @@ put "/projects/:id" do |env|
     project.description = description
     project.short = short
     project.save
-
+    {data: project}.to_json
   else
     raise Kemal::Exceptions::RouteNotFound.new(env)
   end
@@ -105,7 +111,7 @@ end
 get "/projects/:id/picture" do |env|
 
   project = Models::Project.find!(env.params.url["id"])
-  
+
   if project
     picture = project.picture
 
