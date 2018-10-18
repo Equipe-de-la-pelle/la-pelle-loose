@@ -8,3 +8,7 @@
 .ftpconfig
 /uploads/**/*
 !/uploads/users/.keep
+
+\.travis\.yml
+
+config~HEAD
