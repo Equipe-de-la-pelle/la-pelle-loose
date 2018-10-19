@@ -1,12 +1,13 @@
 require "./spec_helper"
 
+
 describe "La::Pelle::Loose" do
   it "All Projects" do
     get "/projects"
 
     projects = JSON.parse(response.body)["data"]
 
-    (projects.size > 45 && projects.size < 55).should be_true
+    (projects.size > 0 && projects.size < 10).should be_true
   end
 
     it "Find project #53" do
@@ -24,7 +25,7 @@ describe "La::Pelle::Loose" do
       end
     end
 
-    it "new project #53" do
+    it "new project #1" do
       post "/projects" do |env|
         env.params.json.to_json
       end
@@ -42,8 +43,8 @@ describe "La::Pelle::Loose" do
     end
 
 
-    it "Delete #53" do
-      delete "/projects/53"
+    it "Delete #1" do
+      delete "/projects/1"
       (response.status_code == 200 || response.body["error"] != nil).should be_true
     end
 end
