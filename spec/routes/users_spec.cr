@@ -83,7 +83,7 @@ describe "/users* routes" do
       user["last_name"].should eq json_body["last_name"]
       user["nickname"].should eq json_body["nickname"]
 
-      response.status_code.shoud eq 200
+      response.status_code.should eq 200
     end
 
     pending "with missing key" do
@@ -99,7 +99,7 @@ describe "/users* routes" do
   end
 
   describe "Update" do
-    it "with all keys" do
+    pending "with all keys" do
       json_body = {"first_name" => "Testy", "last_name" => "McTestFace", "nickname" => "Billy", "email" => "testy@billy.ts"}
       put("users",headers: HTTP::Headers{"Content-Type"=>"application/json"} , body: json_body.to_json)
 
