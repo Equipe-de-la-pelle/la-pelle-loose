@@ -20,4 +20,7 @@ before_all do |env|
   # env.response.headers.add("Content-Size", filestat.size.to_s)
 end
 
+options "/*" do
+end
+
 Kemal.run
