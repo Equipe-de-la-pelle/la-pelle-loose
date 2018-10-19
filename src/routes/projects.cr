@@ -1,3 +1,9 @@
+options "/projects" do
+end
+
+options "/projects/:id/picture" do
+end
+
 get "/projects" do |env|
   projects = Models::Project.all
 
