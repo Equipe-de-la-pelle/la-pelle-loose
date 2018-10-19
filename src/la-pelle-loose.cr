@@ -3,6 +3,7 @@ require "kemal"
 require "granite"
 require "granite/adapter/pg"
 require "pg"
+require "json"
 
 Granite::Adapters << Granite::Adapter::Pg.new({ name: "pg", url: ENV["DATABASE_URL"] })
 Granite.settings.logger = Logger.new(STDOUT)
