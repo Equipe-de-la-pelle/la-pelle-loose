@@ -10,6 +10,8 @@ module Models
     field short : String
     field email : String
 
+    timestamps
+
     belongs_to :picture, foreign_key: picture_id : Int32?
 
     # has_many :user_projects, class_name: UserProject
