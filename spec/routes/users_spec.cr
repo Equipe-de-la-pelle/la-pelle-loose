@@ -39,18 +39,49 @@ describe "/users* routes" do
   end
 
   describe "Create" do
-    pending "with all keys" do
+    it "with all keys" do
+      json_body = {"first_name" => "Testy", "last_name" => "McTestFace", "nickname" => "Billy", "email" => "testy@billy.ts"}
+      post("users",headers: HTTP::Headers{"Content-Type"=>"application/json"} , body: json_body.to_json)
+
+      user = JSON.parse(response.body)["data"]
+
+      user["first_name"].should eq json_body["first_name"]
+      user["email"].should eq json_body["email"]
+      user["last_name"].should eq json_body["last_name"]
+      user["nickname"].should eq json_body["nickname"]
+
+      response.status_code.shoud eq 200
     end
 
     pending "with missing key" do
+      json_body = {"first_name" => "Testy", "last_name" => "McTestFace"}
+      post("users",headers: HTTP::Headers{"Content-Type"=>"application/json"} , body: json_body.to_json)
+
+      error = JSON.parse(response.body)["data"]
+
+      error["error"].should eq "not_found"
+
+      response.status_code.shoud eq 500
     end
   end
 
   describe "Update" do
-    pending "with all keys" do
+    it "with all keys" do
+      json_body = {"first_name" => "Testy", "last_name" => "McTestFace", "nickname" => "Billy", "email" => "testy@billy.ts"}
+      put("users",headers: HTTP::Headers{"Content-Type"=>"application/json"} , body: json_body.to_json)
+
+      user = JSON.parse(response.body)["data"]
+
+      user["first_name"].should eq json_body["first_name"]
+      user["email"].should eq json_body["email"]
+      user["last_name"].should eq json_body["last_name"]
+      user["nickname"].should eq json_body["nickname"]
     end
 
     pending "with missing key" do
+    end
+
+    pending "user not existing" do
     end
   end
 
